@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้อมูล</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" crossorigin href="/static/Project.css">
+    <style>
+        .content {
+            text-align: center;
+            /* ทำให้ข้อความตรงกลาง */
+            padding: 80px;
+        }
+
+        .text-section h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .howto-section {
+            margin-top: 80px;
+            text-align: left;
+            /* ข้อความในนี้จะจัดให้อยู่ทางซ้าย */
+        }
+
+        .howto-section h2 {
+            font-size: 1.8rem;
+            color: #0000ff;
+            /* สีม่วงเข้ม */
+            margin-bottom: 12px;
+            font-weight: 600;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #0000ff;
+            /* เพิ่มเส้นขอบใต้หัวข้อ */
+        }
+
+        .howto-section p {
+            font-size: 1rem;
+            color: #ffffffc7;
+            /* สีข้อความ */
+            margin-bottom: 20px;
+            line-height: 1.6;
+            /* เพิ่มระยะห่างระหว่างบรรทัด */
+            padding-left: 20px;
+            /* ให้มีระยะห่างจากขอบซ้าย */
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        /* Animation */
+        .animate-float-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-float-up-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg animate-float-up">
+        <a class="navbar-brand" href="/static/Zeref.html">Z-BOOK</a>
+        <div class="collapse navbar-collapse">
+             <ul class="navbar-nav ml-auto">
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/หนังสือทั้งหมด.html">หนังสือทั้งหมด</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_book">ค้นหารายการหนังสือ</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_student">ค้นหารายชื่อนักศึกษา</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/เติมเงิน.html">เติมเงิน</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/ออกจากระบบ.html">ออกจากระบบ</a></li>
+            </ul>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content animate__animated animate__zoomIn">
+        <div>
+            <h1>ประวัติการยืมหนังสือ</h1>
+            <div class="borrow-history-section animate__animated animate__bounceInUp">
+                <h2>รายชื่อหนังสือที่ถูกยืม</h2>
+                <div id="borrowed-books">
+                    <!-- รายการหนังสือที่ถูกยืมจะถูกแสดงที่นี่ -->
+                </div>
+                <button id="refreshButton" class="btn btn-primary">Refresh</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <script>
+        const borrowedBooks = [
+            { name: "โคนัน ยอดนักสืบประวัติศาสตร์โลก 7", total: 10, borrowed: 0 },
+            { name: "ผีอินโดนีเซีย: ชุด เรื่องผีๆ รอบโลก", total: 10, borrowed: 0 },
+            { name: "คุกกี้รันผจญภัย เล่ม 43: ผจญภัยในอะแลสกา", total: 10, borrowed: 0 },
+            { name: "คุกกี้รันเอาชีวิตรอด เล่ม 33: จากงูยักษ์บาซิลิสก์", total: 10, borrowed: 0 },
+            { name: "ครอบครัวตึ๋งหนืด เล่ม 14 ตอน ไอเดียแก้จนคนตึ๋งหนืด", total: 10, borrowed: 0 },
+            { name: "ผีอังกฤษ : ชุด เรื่องผีๆ รอบโลก", total: 10, borrowed: 0 },
+            { name: "โคนัน ยอดนักสืบประวัติศาสตร์โลก 6", total: 10, borrowed: 0 },
+            { name: "เรื่องวุ่น ๆ ของวัยรุ่นมือใหม่", total: 10, borrowed: 0 },
+            { name: "เอาชีวิตรอดจากภูมิแพ้ เล่ม 1", total: 10, borrowed: 0 },
+        ];
+    
+        function displayBorrowedBooks() {
+            const container = document.getElementById('borrowed-books');
+            container.innerHTML = ''; // Clear the content before re-displaying
+            borrowedBooks.forEach((book, index) => {
+                const remaining = book.total - book.borrowed;
+                const bookElement = document.createElement('div');
+                bookElement.innerHTML = `
+                    <h3>${book.name}</h3>
+                    <p>ยืมไปแล้ว: <span id="borrowed-${index}">${book.borrowed}</span> เล่ม</p>
+                    <p>คงเหลือ: <span id="remaining-${index}">${remaining}</span> เล่ม</p>
+                `;
+                container.appendChild(bookElement);
+            });
+        }
+    
+        function refreshPage() {
+            displayBorrowedBooks();  // Reload the book info when the "Refresh" button is clicked
+        }
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            displayBorrowedBooks(); // Display borrowed books initially
+    
+            // Add event listener for refresh button
+            const refreshButton = document.getElementById("refreshButton");
+            refreshButton.addEventListener("click", refreshPage); // Refresh the data on click
+        });
+    </script>
+    
+    <style>
+        /* Styling for the Refresh button */
+        #refreshButton {
+            background-color: #0000ff; /* Blue color */
+            color: white; /* White text */
+            border: none; /* Remove border */
+            padding: 10px 20px; /* Add padding */
+            font-size: 16px; /* Font size */
+            cursor: pointer; /* Pointer cursor */
+            border-radius: 5px; /* Rounded corners */
+            margin-top: 20px; /* Space from other elements */
+        }
+    
+        /* Hover effect for Refresh button */
+        #refreshButton:hover {
+            background-color: #1e90ff; /* Lighter blue when hovered */
+        }
+    </style>
+    
+    
+</body>
+
+</html>

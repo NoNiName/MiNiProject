@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ค้นหานักศึกษา</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" crossorigin href="/static/Project.css">
+    <style>
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.6);
+            /* สีพื้นหลังที่เปลี่ยนแล้ว */
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            margin: 20px;
+            max-height: 80vh;
+            /* กำหนดความสูงสูงสุด */
+            overflow-y: auto;
+            border: 2px solid #0000ff;
+            /* ให้เนื้อหาภายในสามารถเลื่อนขึ้น-ลงได้ */
+        }
+
+        h1 {
+            color: #ffffff;
+            /* ตัวหนังสือเป็นสีขาว */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            /* สีขอบเป็นสีขาวโปร่งแสง */
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* พื้นหลังของอินพุตเป็นสีดำโปร่งแสง */
+            color: white;
+            /* ตัวหนังสือในฟอร์มเป็นสีขาว */
+        }
+
+        .form-control:focus {
+            border-color: #0000ff;
+            /* เปลี่ยนสีขอบเมื่อ focus */
+            box-shadow: 0 0 5px #0000ff;
+            /* เพิ่มเงาเมื่อ focus */
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            /* สีขาวโปร่งแสงสำหรับ placeholder */
+            opacity: 1;
+            /* ให้ความทึบเต็มที่ */
+        }
+
+
+
+        .btn-primary {
+            background-color: #0000ff;
+            /* สีม่วงเข้ม */
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            color: white;
+            /* ตัวหนังสือปุ่มเป็นสีขาว */
+        }
+
+        .btn-primary:hover {
+            background-color: #0000ff;
+            /* สีม่วงเข้มขึ้นเมื่อ hover */
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .table th {
+            background-color: rgb(0, 0, 0);
+            /* สีม่วงเข้ม */
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            /* ตัวหนังสือในตารางเป็นสีขาว */
+        }
+
+        .table td {
+            background-color: rgba(0, 0, 0, 0.7);
+            /* พื้นหลังเซลล์ตารางเป็นสีดำโปร่งแสง */
+            color: white;
+            /* ตัวหนังสือในเซลล์ตารางเป็นสีขาว */
+        }
+
+        .text-align {
+            color: #eeeeeeaf;
+            /* สีเทาอ่อน */
+        }
+
+        footer {
+            text-align: center;
+            color: #aaa;
+            /* สีเทาอ่อน */
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .form-control {
+            padding: 10px;
+            /* เพิ่ม padding เพื่อให้กรอบใหญ่ขึ้น */
+            font-size: 15px;
+            /* เพิ่มขนาดฟอนต์ */
+            width: 100%;
+            /* ทำให้กรอบเต็มความกว้างของคอลัมน์ */
+            border: 2px solid #0000ff;
+            /* กำหนดขอบเป็นสีม่วง */
+            border-radius: 8px;
+            /* เพิ่มความโค้งมนให้กับขอบ */
+        }
+
+        .form-control:focus {
+            border-color: #0000ff;
+            /* เปลี่ยนสีขอบเมื่อ focus */
+            box-shadow: 0 0 5px #0000ff;
+            /* เพิ่มเงาเมื่อ focus */
+        }
+
+        .animate-float-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-float-up-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <title>ค้นหานักศึกษา</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg animate-float-up">
+        <a class="navbar-brand" href="/static/Zeref.html">Z-BOOK</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/หนังสือทั้งหมด.html">หนังสือทั้งหมด</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_book">ค้นหารายการหนังสือ</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_student">ค้นหารายชื่อนักศึกษา</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/เติมเงิน.html">เติมเงิน</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/ออกจากระบบ.html">ออกจากระบบ</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container animate__animated animate__zoomIn">
+        <h1>ค้นหารายชื่อนักศึกษา</h1>
+        <p class="text-white text-center">ค้นหานักศึกษาโดยใช้คำสำคัญ</p>
+
+        <div class="form-section animate__animated animate__bounceIn">
+            <form action="/search_student" method="GET">
+                <div class="row g-2">
+                    <div class="col-md-10">
+                        <input type="text" name="query" class="form-control" placeholder="กรอกชื่อหรือนามสกุล"
+                            value="{{ query }}">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">ค้นหา</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        {% if students %}
+        <table class="table table-bordered animate-float-up">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Prefix</th>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Year</th>
+                    <th>Department</th>
+                    <th>Account Number</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student[0] }}</td> <!-- id -->
+                    <td>{{ student[1] }}</td> <!-- prefix -->
+                    <td>{{ student[2] }}</td> <!-- studentID -->
+                    <td>{{ student[3] }}</td> <!-- firstName -->
+                    <td>{{ student[4] }}</td> <!-- lastName -->
+                    <td>{{ student[5] }}</td> <!-- year -->
+                    <td>{{ student[6] }}</td> <!-- department -->
+                    <td>{{ student[7] }}</td> <!-- accountNumber -->
+                    <td>{{ student[8] }}</td> <!-- age -->
+                    <td>{{ student[9] }}</td> <!-- email -->
+                    <td>{{ student[10] }}</td> <!-- phone -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-align text-center mt-4">ไม่พบผลลัพธ์สำหรับ "{{ query }}"</p>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,863 @@
+/* Global Styles */
+@keyframes floatUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-float-up {
+    animation: floatUp 1s ease-out forwards;
+    opacity: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url('/static/images/spider.gif') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 3rem;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    border: 2px solid #0000ff;
+}
+
+/* สไตล์สำหรับ .navbar-brand */
+.navbar-brand {
+    color: #D8DEE9;
+    /* สีเริ่มต้นเหมือน .nav-link */
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-left: 20px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* การเปลี่ยนสีและขยายเมื่อชี้ */
+}
+
+/* เมื่อชี้ไปที่ .navbar-brand */
+.navbar-brand:hover {
+    color: #D8DEE9;
+    /* เปลี่ยนสีเหมือน .nav-link เมื่อชี้ */
+    transform: scale(1.1);
+    /* ขยายขนาดเมื่อชี้ */
+}
+
+/* เมื่อคลิกที่ .navbar-brand */
+.navbar-brand:active {
+    color: #9b59b6;
+    /* สีม่วงเมื่อคลิก */
+    transform: scale(0.98);
+    /* ลดขนาดเมื่อคลิก */
+}
+
+/* Navbar Links - Hover Effects */
+.navbar-nav .nav-item a {
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link {
+    color: #D8DEE9;
+    margin-left: 20px;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #D8DEE9;
+    transform: scale(1.1);
+}
+
+.navbar-nav .nav-link:active {
+    color: #0000ff;
+    transform: scale(0.98);
+}
+
+/* Content Section */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 3rem;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    border: 2px solid #0000ff;
+}
+
+.content img {
+    max-width: 60%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.text-section {
+    max-width: 40%;
+    color: white;
+}
+
+.text-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.text-section p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.text-section button {
+    background-color: rgba(0, 0, 0, 0.6);
+    /* สีพื้นหลังดำบาง */
+    color: white;
+    border: 2px solid #0000ff;
+    /* กรอบสีม่วง */
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    /* เงาเบาๆ เพื่อให้ปุ่มดูมีมิติ */
+}
+
+/* เอฟเฟกต์เมื่อ hover */
+.text-section button:hover {
+    background-color: #0000ff;
+    /* สีม่วงเข้ม */
+    border-color: #0000ff;
+    /* เปลี่ยนกรอบเป็นสีม่วงเข้ม */
+    transform: translateY(-5px);
+    /* เคลื่อนที่ขึ้นเล็กน้อย */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+    /* เพิ่มเงาให้มากขึ้น */
+}
+
+/* เอฟเฟกต์เมื่อคลิกปุ่ม */
+.text-section button:active {
+    transform: translateY(2px);
+    /* เคลื่อนที่ลงเมื่อคลิก */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    /* ลดเงาเมื่อคลิก */
+}
+
+/* เพิ่มเอฟเฟกต์เมื่อได้รับการโฟกัส */
+.text-section button:focus {
+    outline: none;
+    /* เอาขอบสีออก */
+    border-color: #0000ff;
+    /* ขอบสีม่วงเข้ม */
+    box-shadow: 0px 0px 8px #0000ff;
+    /* เพิ่มแสงสีม่วงเมื่อปุ่มได้รับการโฟกัส */
+}
+
+
+/* Products Section */
+.products-section {
+    padding: 1rem 1.5rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 3rem 0;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid #0000ff;
+}
+
+.products-section h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem;
+    text-align: center;
+    width: 250px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px #0000ff;
+}
+
+/* ปรับขนาดของรูปภาพให้เท่ากัน */
+.product-card img {
+    width: 150px;
+    /* ขนาดความกว้างที่กำหนด */
+    height: 200px;
+    /* ขนาดความสูงที่กำหนด */
+    object-fit: cover;
+    /* ให้รูปภาพคงสัดส่วนเดิม */
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: #fff;
+}
+
+.product-card p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: #bbb;
+}
+
+.product-card button {
+    margin-top: auto;
+    /* ทำให้ปุ่มอยู่ด้านล่างสุดของการ์ด */
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: 2px solid #0000ff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.product-card button:hover {
+    background-color: #0000ff;
+}
+
+/* Modal Styles */
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-header .close {
+    color: white;
+    opacity: 1;
+}
+
+.modal-header .close:hover {
+    color: #0000ff;
+}
+
+/* Footer Modal */
+.modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    justify-content: flex-end;
+}
+
+.modal-footer .btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1.25rem;
+}
+
+.modal-footer .btn:hover {
+    background-color: #0000ff;
+}
+
+/* Image in Modal */
+.modal-body img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .text-section {
+        max-width: 90%;
+        margin-bottom: 2rem;
+    }
+
+    .products-container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card {
+        width: auto;
+        margin: 1rem 0;
+    }
+
+    .navbar-nav .nav-link {
+        margin-left: 10px;
+        font-size: 1rem;
+    }
+
+    .modal-content {
+        padding: 4rem 2rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .text-section h1 {
+        font-size: 2rem;
+    }
+
+    .text-section p {
+        font-size: 1rem;
+    }
+
+    .product-card {
+        width: 100%;
+    }
+}
+
+/* Back Button */
+.go-back-btn {
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.go-back-btn:hover {
+    background-color: #555;
+    transform: translateY(-3px);
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid #0000ff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: #0000ff;
+    border-color: #0000ff;
+    transform: translateY(-3px);
+}
+
+.dropdown-menu-custom {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    width: 200px;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-menu-custom li {
+    padding: 10px 20px;
+    text-align: left;
+    color: #fff;
+}
+
+.dropdown-menu-custom li:hover {
+    background-color: #0000ff;
+}
+
+.dropdown:hover .dropdown-menu-custom {
+    display: block;
+}
+
+.dropdown-toggle:active,
+.dropdown-menu-custom li:active {
+    transform: scale(0.98);
+}
+
+/* กรอบและการตกแต่งของฟอร์ม */
+.register-form {
+    background-color: rgba(0, 0, 0, 0.6);
+    /* สีพื้นหลังเข้ม */
+    border: 2px solid #444;
+    /* กรอบสีดำอ่อน */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+/* ปรับข้อความในหัวข้อ */
+.register-form h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+/* ปรับรูปแบบของฟอร์ม */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.form-group input {
+    border: 1px solid #ccc;
+    /* กรอบปกติ */
+    padding: 0.75rem;
+    border-radius: 5px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.form-group input:focus {
+    border-color: #0000ff;
+    /* เปลี่ยนกรอบเมื่อโฟกัส */
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ปุ่มสมัครสมาชิก */
+button[type="submit"] {
+    background-color: rgba(0, 0, 0, 0.6);
+    /* สีพื้นหลังดำบาง */
+    color: white;
+    border: 2px solid #0000ff;
+    /* กรอบสีม่วง */
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    /* เพิ่มเงาเบาๆ */
+}
+
+/* เอฟเฟกต์ hover */
+button[type="submit"]:hover {
+    background-color: #0000ff;
+    /* สีม่วงเข้ม */
+    transform: translateY(-5px);
+    /* เคลื่อนที่ขึ้นเล็กน้อย */
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    /* เพิ่มเงา */
+    border-color: #0000ff;
+    /* กรอบสีม่วงเดิม */
+}
+
+/* เอฟเฟกต์เมื่อคลิกปุ่ม */
+button[type="submit"]:active {
+    transform: translateY(2px);
+    /* เคลื่อนที่ลงเมื่อคลิก */
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    /* ลดเงาลงเมื่อคลิก */
+}
+
+/* เพิ่มเอฟเฟกต์การแสดงแสงเมื่อมีการโฟกัส */
+button[type="submit"]:focus {
+    outline: none;
+    /* เอาขอบสีออก */
+    border-color: #0000ff;
+    /* ขอบสีม่วงเข้ม */
+    box-shadow: 0px 0px 8px #0000ff;
+    /* เงาสีม่วงอ่อน */
+}
+
+/* Styling สำหรับ Navbar */
+/* Navbar */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #D8DEE9;
+    transform: scale(1.1);
+}
+
+.navbar-nav .nav-link:active {
+    color: #0000ff;
+    transform: scale(0.98);
+}
+
+/* Dropdown */
+.dropdown .nav-link {
+    color: white;
+    /* ทำให้ตัว "Menu" เป็นสีขาว */
+}
+
+.dropdown-toggle:focus {
+    outline: none;
+}
+
+/* Hide the dropdown for desktop (>=768px) */
+@media screen and (min-width: 768px) {
+    .navbar-nav .nav-item.dropdown {
+        display: none;
+        /* ซ่อน dropdown ใน desktop */
+    }
+}
+
+/* Media queries for mobile display */
+@media screen and (max-width: 768px) {
+    .navbar-toggler-icon {
+        background-color: #0000ff;
+        /* เปลี่ยนสีไอคอน toggle ให้เป็นสีม่วง */
+    }
+
+    .dropdown-menu {
+        background-color: rgba(0, 0, 0, 0.8);
+        /* สีพื้นหลัง dropdown */
+    }
+
+    .dropdown-item {
+        color: white;
+        /* ตัวเลือกใน dropdown เป็นสีขาว */
+    }
+
+    .dropdown-item:hover {
+        background-color: #0000ff;
+        /* สีม่วงเมื่อ hover */
+    }
+}
+
+/* Payment Section Layout */
+.payment-methods {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 2rem;
+}
+
+.payment-method {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1rem;
+}
+
+.payment-method img {
+    max-width: 80px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 2px solid #9c59b600;
+    /* Purple border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth hover effect */
+}
+
+.payment-method img:hover {
+    transform: translateY(-5px);
+    /* Lift image */
+    box-shadow: 0px 8px 20px rgba(156, 89, 182, 0);
+    /* Purple shadow */
+}
+
+.payment-method p {
+    font-size: 1rem;
+    color: #fff;
+}
+
+.payment-details {
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Dark semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    border: 2px solid #0000ff;
+    /* Purple border */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    /* Subtle shadow for depth */
+}
+
+.payment-details h2 {
+    margin-bottom: 10px;
+}
+
+.payment-details p {
+    margin-bottom: 20px;
+}
+
+.payment-details img {
+    max-width: 150px;
+    margin-bottom: 20px;
+    border: 2px solid #0000ff;
+    /* Purple border */
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.payment-details img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px #0000ff;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #0000ff;
+    /* Purple button hover effect */
+    transform: translateY(-5px);
+    /* Button lift */
+    box-shadow: 0px 8px 20px #0000ff;
+    /* Purple shadow */
+}
+
+/* Form Section Layout */
+.form-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.form-container form {
+    max-width: 300px;
+    text-align: right;
+    /* จัดข้อความในฟอร์มให้อยู่ด้านขวา */
+}
+
+.form-container label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .payment-methods {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-container {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+/* ปรับสีตัวอักษรในช่อง input */
+.form-group input {
+    color: #fff;
+    /* ทำให้ตัวหนังสือใน input เป็นสีขาว */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* สีพื้นหลังแบบโปร่งใส */
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    /* สีของ placeholder ให้โปร่งใสเล็กน้อย */
+}
+
+.form-group input:focus {
+    border-color: #0000ff;
+    /* เปลี่ยนกรอบเมื่อโฟกัส */
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.637);
+    /* พื้นหลังเมื่อโฟกัส */
+}
+
+.product-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa00;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option-img {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.option p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+/* ตัวอย่างการเปลี่ยนจากสีม่วงเป็นสีน้ำเงิน */
+
+/* Navbar */
+.navbar {
+    border: 2px solid #0000ff; /* เปลี่ยนกรอบเป็นสีน้ำเงิน */
+}
+
+/* Navbar Brand Hover */
+.navbar-brand:active {
+    color: #0000ff; /* เปลี่ยนสีเมื่อตัวแบรนด์ถูกคลิกเป็นสีน้ำเงิน */
+}
+
+/* Navbar Links Active */
+.navbar-nav .nav-link:active {
+    color: #0000ff; /* เปลี่ยนสีลิงค์ที่ถูกคลิกเป็นสีน้ำเงิน */
+}
+
+/* Content Section */
+.content {
+    border: 2px solid #0000ff; /* เปลี่ยนกรอบเป็นสีน้ำเงิน */
+}
+
+/* Text Section Button */
+.text-section button {
+    border: 2px solid #0000ff; /* เปลี่ยนกรอบปุ่มเป็นสีน้ำเงิน */
+}
+
+.text-section button:hover {
+    background-color: #0000ff; /* เปลี่ยนพื้นหลังปุ่มเมื่อ hover เป็นสีน้ำเงิน */
+    border-color: #0000ff; /* เปลี่ยนกรอบปุ่มเป็นสีน้ำเงิน */
+}
+
+/* Products Section */
+.products-section {
+    border: 2px solid #0000ff; /* เปลี่ยนกรอบเป็นสีน้ำเงิน */
+}
+
+.product-card button {
+    border: 2px solid #0000ff; /* เปลี่ยนกรอบปุ่มเป็นสีน้ำเงิน */
+}
+
+.product-card button:hover {
+    background-color: #0000ff; /* เปลี่ยนพื้นหลังปุ่มเมื่อ hover เป็นสีน้ำเงิน */
+}
+
+/* Dropdown Menu */
+.dropdown-menu-custom li:hover {
+    background-color: #0000ff; /* เปลี่ยนพื้นหลังเมนู dropdown เมื่อ hover เป็นสีน้ำเงิน */
+}
+
+/* Payment Section */
+.payment-details {
+    border: 2px solid #0000ff; /* เปลี่ยนกรอบเป็นสีน้ำเงิน */
+}
+
+.payment-details img {
+    border: 2px solid #0000ff; /* เปลี่ยนกรอบของรูปใน Payment Section เป็นสีน้ำเงิน */
+}
+
+.payment-method img:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 255, 0.6); /* เปลี่ยนเงาเป็นสีน้ำเงิน */
+}

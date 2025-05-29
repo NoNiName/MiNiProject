@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/Employees.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1877"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="Employees" custom_title="0" dock_id="1" table="4,9:mainEmployees"/><dock_state state="000000ff00000000fd0000000100000002000005bb00000390fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000005bb0000012300ffffff000002690000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Customer" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="45"/><column index="2" value="59"/><column index="3" value="65"/><column index="4" value="64"/><column index="5" value="54"/><column index="6" value="67"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Employees" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="8" mode="0"/></sort><column_widths><column index="1" value="49"/><column index="2" value="59"/><column index="3" value="65"/><column index="4" value="64"/><column index="5" value="54"/><column index="6" value="67"/><column index="7" value="70"/><column index="8" value="101"/><column index="9" value="111"/><column index="10" value="79"/><column index="11" value="52"/><column index="12" value="49"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">CREATE TABLE &quot;Customer&quot; (
+	&quot;Cus_id&quot;	TEXT NOT NULL,
+	&quot;Prename&quot;	TEXT,
+	&quot;Firstname&quot;	TEXT,
+	&quot;Lastname&quot;	TEXT,
+	&quot;Address&quot;	TEXT,
+	&quot;Telephone&quot;	TEXT,
+	PRIMARY KEY(&quot;Cus_id&quot;)
+);</sql><sql name="SQL 2*">-- คำสั่งที่ 1
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10101, 'น.ส.', 'สมมีบุญ', 'จันทองลา', '12 อ.เมือง จ.ศรีสะเกษ', '823456789', 11000, '2554-09-13', 0.5, 5500, 16500, 1, 1);
+
+-- คำสั่งที่ 2
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10102, 'น.ส.', 'มีนา', 'แสนหวาน', '11 อ.ขุขันธ์ จ.ศรีสะเกษ', '897898988', 10000, '2555-05-08', 0.25, 2500, 12500, 1, 1);
+
+-- คำสั่งที่ 3
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10106, 'น.ส.', 'นฤมล', 'จันทองลา', '34 อ.เมือง จ.ศรีสะเกษ', '823456784', 15000, '2554-09-13', 0.25, 3750, 18750, 2, 2);
+
+-- คำสั่งที่ 4
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10107, 'นาง', 'สมทอง', 'จันสี', '56 ถ.เมือง จ.ศรีสะเกษ', '823456785', 15000, '2554-09-13', 0.25, 3750, 18750, 2, 2);
+
+-- คำสั่งที่ 5
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10108, 'นาย', 'มิติ', 'นิมิต', '34 ถ.เมือง จ.ศรีสะเกษ', '823456786', 15000, '2554-09-13', 0.25, 3750, 18750, 3, 3);
+
+-- คำสั่งที่ 6
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10109, 'นาย', 'นนทวัฒน์', 'ปางคีมดี', '87 ถ.เมือง จ.อุบลราชธานี', '823456787', 10000, '2554-09-13', 0.25, 2500, 12500, 2, 1);
+
+-- คำสั่งที่ 7
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10110, 'นาย', 'มีนา', 'แสนหวาน', '120 ถ.เมือง จ.อุบลราชธานี', '823456788', 15000, '2554-09-13', 0.25, 3750, 18750, 4, 2);
+
+-- คำสั่งที่ 8
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10111, 'น.ส.', 'มิตตรทรัพย์', 'หมายมุ่ง', '11 ถ.เมือง จ.ศรีสะเกษ', '823456789', 15000, '2554-09-13', 0.25, 3750, 18750, 4, 2);
+
+-- คำสั่งที่ 9
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10112, 'น.ส.', 'มานี', 'ทองมาก', '13 ถ.เมือง จ.ศรีสะเกษ', '823456790', 15000, '2554-09-13', 0.15, 2250, 17250, 4, 3);
+
+-- คำสั่งที่ 10
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10113, 'นาย', 'นะโม', 'สิงห์ทอง', '22/33 ถ.เมือง จ.ศรีสะเกษ', '823443331', 15000, '2554-09-13', 0.15, 2250, 17250, 4, 3);
+
+-- คำสั่งที่ 11
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10115, 'นาย', 'ทองมณี', 'สิงหา', '12/3 ถ.เมือง จ.ศรีสะเกษ', '823454672', 15000, '2551-09-13', 0.25, 3750, 18750, 1, 1);
+
+-- คำสั่งที่ 12
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10117, 'นาง', 'สมศรี', 'มีเงิน', '12/3 ถ.เมือง จ.ศรีสะเกษ', '823454573', 15000, '2552-09-04', 0.15, 2250, 17250, 3, 3);
+
+-- คำสั่งที่ 12
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10118, 'นาย', 'ลำแพน', 'มีเงิน', '12/3 ถ.เมือง จ.ศรีสะเกษ', '823454573', 15000, '2552-09-04', 0.15, 2250, 17250, 3, 3);
+
+-- คำสั่งที่ 13
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10119, 'นาย', 'มิติ', 'นิมิต', '34 ถ.เมือง จ.ศรีสะเกษ', '823456791', 15000, '2552-09-13', 0.25, 3750, 18750, 7, 1);
+
+-- คำสั่งที่ 14
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10120, 'นาย', 'มิติ', 'นิมิต', '34 ถ.เมือง จ.ศรีสะเกษ', '823456792', 15000, '2554-09-13', 0.25, 3750, 18750, 1, 1);
+
+-- คำสั่งที่ 15
+INSERT INTO Employees (Emp_id, Prename, Firstname, Lastname, Address, Telephone, Salary, Start_date, Commission_pct, Commission, Total_salary, Dept_id, Man_id)
+VALUES (10121, 'นาย', 'สรวิชญ์', 'เขตขงขวาง', '23 หมู่ 6 อ.เมือง จ.นครสวรรค์', '0637269866', 15000, '2555-09-13', 0.25, 3750, 18750, 1, 1);</sql><sql name="SQL 3*">SELECT * 
+FROM Employees
+WHERE Start_date &gt;= '2554-09-01';
+</sql><current_tab id="2"/></tab_sql></sqlb_project>

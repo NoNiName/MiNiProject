@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-BOOK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" crossorigin href="/static/Project.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg animate-float-up">
+        <a class="navbar-brand" href="#">Z-BOOK</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/หนังสือทั้งหมด.html">หนังสือทั้งหมด</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_book">ค้นหารายการหนังสือ</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_student">ค้นหารายชื่อนักศึกษา</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/เติมเงิน.html">เติมเงิน</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/ออกจากระบบ.html">ออกจากระบบ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content animate__animated animate__zoomIn">
+        <div class="text-section">
+            <h1>Welcome to Z-BOOK</h1>
+            <p>เปิดประสบการณ์การเรียนรู้ที่กว้างไกล กับระบบเช่ายืมหนังสือของวิทยาลัย!
+                เราพร้อมให้บริการหนังสือเรียน งานวิจัย วารสาร และสื่อการศึกษาอื่น ๆ ที่ครบครัน
+                เพื่อสนับสนุนการศึกษาและการพัฒนาของนักศึกษาและบุคลากรในวิทยาลัย
+                สะดวก ใช้งานง่าย พร้อมระบบออนไลน์ที่ช่วยให้การค้นหาและยืมคืนเป็นเรื่องง่าย
+                สมัครใช้งานวันนี้เพื่อการเรียนรู้ที่เหนือระดับ!</p>
+            <button class="btn btn-primary animate__animated animate__rubberBand "
+                onclick="window.location.href='/static/ออกจากระบบ.html';">เข้าสู่ระบบ</button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal fade animate-float-up" id="productModal" tabindex="-1" role="dialog"
+        aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Product Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="productModalImage" src="" alt="Product Image" class="img-fluid mb-3">
+                    <p id="productModalPrice"></p>
+                    <p>รายละเอียดเพิ่มเติมเกี่ยวกับผลิตภัณฑ์</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // เลือกองค์ประกอบที่ต้องการให้มีเอฟเฟกต์การลอยขึ้น
+            const elements = document.querySelectorAll('.animate-float-up');
+
+            // ตั้งค่า delay ให้แต่ละองค์ประกอบลอยขึ้นมาทีละชิ้น
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('animate-float-up-visible');
+                }, index * 200); // หน่วงเวลาแต่ละองค์ประกอบ 200 มิลลิวินาที
+            });
+        });
+    </script>
+</body>
+
+</html>

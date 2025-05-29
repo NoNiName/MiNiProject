@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="student.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1543"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="students" custom_title="0" dock_id="4" table="4,8:mainstudents"/><dock_state state="000000ff00000000fd00000001000000020000047b000002e4fc0100000004fb000000160064006f0063006b00420072006f00770073006500310100000000000007740000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000000007740000000000000000fb000000160064006f0063006b00420072006f007700730065003301000000000000047b0000000000000000fb000000160064006f0063006b00420072006f007700730065003401000000000000047b0000012a00ffffff0000047b0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="students" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="95"/><column index="2" value="36"/><column index="3" value="40"/><column index="4" value="58"/><column index="5" value="71"/><column index="6" value="36"/><column index="7" value="42"/><column index="8" value="38"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">DROP TABLE IF EXISTS students;
+
+CREATE TABLE students ( 
+    pk INTEGER PRIMARY KEY,
+    title TEXT,
+    name TEXT,
+    surname TEXT,
+    dept TEXT,    -- Department (Set to 'Computer' for all)
+    class TEXT,   -- Class (Set to 'ปวส' for all)
+    Grade TEXT,   -- Grade (Set to '4' for all)
+    room TEXT     -- Room (Set to '2' for all)
+);
+
+-- Insert valid unique rows
+INSERT INTO students (pk, title, name, surname, dept, class, Grade, room) VALUES
+(67319190019, 'นาย', 'กฤษกร', 'ขานดำ', 'Computer', 'ปวส', '4', '2'),
+(67319190020, 'นางสาว', 'จิตรลดา', 'เอี่ยมโคกสูง', 'Computer', 'ปวส', '4', '2'),
+(67319190023, 'นาย', 'ธีระชาติ', 'สุตะพันธ์', 'Computer', 'ปวส', '4', '2'),
+(67319190024, 'นางสาว', 'ปลายฟ้า', 'ศรีสุข', 'Computer', 'ปวส', '4', '2'),
+(67319190026, 'นาย', 'ยศกฤต', 'จันทร์เจริญ', 'Computer', 'ปวส', '4', '2'),
+(67319190028, 'นาย', 'ศุภโชติ', 'ชาญเชิงค้า', 'Computer', 'ปวส', '4', '2'),
+(67319190029, 'นาย', 'สรวิชญ์', 'เชตขงขวาง', 'Computer', 'ปวส', '4', '2'),
+(67319190003, 'นางสาว', 'ชนาพร', 'สุปัญญา', 'Computer', 'ปวส', '4', '2'),
+(67319190015, 'นาย', 'ศุภกร', 'รุททองจันทร์', 'Computer', 'ปวส', '4', '2'),
+(67319190010, 'นาย', 'ปัญญา', 'เอี่ยมน้อย', 'Computer', 'ปวส', '4', '2'),
+(67319190004, 'นาย', 'ธนพนธ์', 'ศรีเเก้ว', 'Computer', 'ปวส', '4', '2'),
+(67319190016, 'นาย', 'สุรศักดิ์', 'สังข์มี', 'Computer', 'ปวส', '4', '2'),
+(67319190018, 'นาย', 'อิทธิโชติ', 'พันพลูวงษ์', 'Computer', 'ปวส', '4', '2');
+
+-- Select all rows
+SELECT * FROM students;
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

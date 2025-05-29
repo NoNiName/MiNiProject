@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณเกรด</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #3E2723;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        header {
+            background-color: rgba(33, 33, 33, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 2.5rem;
+            border-bottom: 4px solid #795548; /* สีของไม้ */
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* ใส่ความโปร่งแสง */
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #3E2723;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #5D4037;
+            font-size: 16px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 16px;
+            margin: 8px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .form-container input:focus {
+            border-color: #795548;
+            outline: none;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 16px;
+            background-color: #795548; /* สีของไม้ */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .form-container button:hover {
+            background-color: #6D4C41; /* สีของไม้เข้มขึ้น */
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3E2723;
+        }
+
+        .result span {
+            color: #795548;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>คำนวณเกรดจากคะแนน</h1>
+</header>
+
+<div class="container">
+
+    <div class="form-container">
+        <h2>กรอกคะแนน</h2>
+        <form id="gradeForm">
+            <label for="score">คะแนน:</label>
+            <input type="number" id="score" name="score" min="0" max="100" required>
+
+            <button type="button" onclick="calculateGrade()">คำนวณเกรด</button>
+        </form>
+    </div>
+
+    <!-- แสดงผลเกรด -->
+    <div class="result" id="gradeResult"></div>
+
+</div>
+
+<script>
+    function calculateGrade() {
+        // รับค่าคะแนนจากฟอร์ม
+        var score = document.getElementById('score').value;
+        var grade = '';
+
+        // ตรวจสอบช่วงคะแนนและกำหนดเกรด
+        if (score >= 90 && score <= 100) {
+            grade = 'A';
+        } else if (score >= 85 && score < 90) {
+            grade = 'B+';
+        } else if (score >= 80 && score < 85) {
+            grade = 'B';
+        } else if (score >= 75 && score < 80) {
+            grade = 'C+';
+        } else if (score >= 70 && score < 75) {
+            grade = 'C';
+        } else if (score >= 65 && score < 70) {
+            grade = 'D+';
+        } else if (score >= 60 && score < 65) {
+            grade = 'D';
+        } else if (score < 60) {
+            grade = 'F';
+        } else {
+            grade = 'คะแนนไม่ถูกต้อง';
+        }
+
+        // แสดงผลเกรด
+        var resultElement = document.getElementById('gradeResult');
+        resultElement.innerHTML = 'เกรดของคุณคือ: <span>' + grade + '</span>';
+    }
+</script>
+
+</body>
+</html>

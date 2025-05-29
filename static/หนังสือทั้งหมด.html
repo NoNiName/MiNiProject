@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบยืมหนังสือ</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="/static/Project.css">
+    <style>
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            /* สีพื้นหลังที่เปลี่ยนแล้ว */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border: 2px solid #0000ff;
+            border-radius: 10px;
+            /* ให้เนื้อหาภายในสามารถเลื่อนขึ้น-ลงได้ */
+        }
+
+        /* เพิ่ม CSS สำหรับตัวเลือกสินค้า */
+        .product-options .option {
+            display: flex;
+            align-items: center;
+            border: 2px solid transparent;
+            padding: 10px;
+            cursor: pointer;
+            transition: border 0.3s ease-in-out;
+        }
+
+        .product-options .option:hover {
+            border: 2px solid #0000ff;
+            /* สีม่วงเมื่อวางเมาส์ */
+        }
+
+        .product-options .option.selected {
+            border: 2px solid #0000ff;
+            /* สีม่วงเมื่อถูกเลือก */
+            box-shadow: 0 0 15px #0000ff;
+            /* เงา */
+        }
+
+        .option-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .product-options p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .animate-float-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-float-up-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg animate-float-up">
+        <a class="navbar-brand" href="/static/Zeref.html">Z-BOOK</a>
+        <div class="collapse navbar-collapse">
+           <ul class="navbar-nav ml-auto">
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/หนังสือทั้งหมด.html">หนังสือทั้งหมด</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_book">ค้นหารายการหนังสือ</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_student">ค้นหารายชื่อนักศึกษา</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/เติมเงิน.html">เติมเงิน</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/ออกจากระบบ.html">ออกจากระบบ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container animate__animated animate__zoomIn"><br>
+        <h2>รายการหนังสือ</h2>
+        <div class="products-container animate__animated animate__zoomInUp">
+            <div class="product-card" data-name="โคนัน ยอดนักสืบประวัติศาสตร์โลก 7" data-price="พร้อมให้ยืม"
+                data-img="/static/images/โคนัน1.jpg" data-options='[
+                     {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/โคนัน1.jpg"},
+                     {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/โคนัน1.jpg"},
+                     {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/โคนัน1.jpg"}
+                 ]'>
+                <img src="/static/images/โคนัน1.jpg" alt="โคนัน">
+                <h3>โคนัน ยอดนักสืบประวัติศาสตร์โลก 7</h3>
+                <h6>ผู้แต่ง: โจ ไมโซกิ</h6>
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+            <div class="product-card" data-name="ผีอินโดนีเซีย: ชุด เรื่องผีๆ รอบโลก" data-price="พร้อมให้ยืม"
+                data-img="/static/images/ผี1.jpg" data-options='[
+                     {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/ผี1.jpg"},
+                     {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/ผี1.jpg"},
+                     {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/ผี1.jpg"}
+                 ]'>
+                <img src="/static/images/ผี1.jpg" alt="ผี">
+                <h3>ผีอินโดนีเซีย: ชุด เรื่องผีๆ รอบโลก</h3>
+                <h6>ผู้แต่ง: สมชัย ใจดี</h6>
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+            <div class="product-card" data-name="คุกกี้รันผจญภัย เล่ม 43: ผจญภัยในอะแลสกา" data-price="พร้อมให้ยืม"
+                data-img="/static/images/คุกกี้รัน1.png" data-options='[
+                     {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/คุกกี้รัน1.png"},
+                     {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/คุกกี้รัน1.png"},
+                     {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/คุกกี้รัน1.png"}
+                 ]'>
+                <img src="/static/images/คุกกี้รัน1.png" alt="คุกกี้รัน">
+                <h3>คุกกี้รันผจญภัย เล่ม 43</h3>
+                <h6>ผู้แต่ง : ทีมคุกกี้รัน</h6>
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+            <div class="product-card" data-name="คุกกี้รันเอาชีวิตรอด เล่ม 33: จากงูยักษ์บาซิลิสก์"
+                data-price="พร้อมให้ยืม" data-img="/static/images/คุกกี้รัน2.png" data-options='[
+                     {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/คุกกี้รัน2.png"},
+                     {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/คุกกี้รัน2.png"},
+                     {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/คุกกี้รัน2.png"}
+                 ]'>
+                <img src="/static/images/คุกกี้รัน2.png" alt="คุกกี้รัน">
+                <h3>คุกกี้รันเอาชีวิตรอด เล่ม 33</h3>
+                <h6>ผู้แต่ง : ทีมคุกกี้รัน</h6>
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+            <div class="product-card" data-name="ครอบครัวตึ๋งหนืด เล่ม 14 ตอน ไอเดียแก้จนคนตึ๋งหนืด"
+                data-price="พร้อมให้ยืม" data-img="/static/images/5.png" data-options='[
+                     {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/5.png"},
+                     {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/5.png"},
+                     {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/5.png"}
+                 ]'>
+                <img src="/static/images/5.png" alt="รอบครัวตึ๋งหนืด">
+                <h3>ครอบครัวตึ๋งหนืด เล่ม 14</h3>
+                <h6>ผู้แต่ง : Yim Chang-ho</h6>
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+            <div class="product-card" data-name="ผีอังกฤษ : ชุด เรื่องผีๆ รอบโลก" data-price="พร้อมให้ยืม"
+                data-img="/static/images/ผี3.png" data-options='[
+        {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/ผี3.png"},
+        {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/ผี3.png"},
+        {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/ผี3.png"}
+    ]'>
+                <img src="/static/images/ผี3.png" alt="ผีอังกฤษ : ชุด เรื่องผีๆ รอบโลก">
+                <h3>ผีอังกฤษ : ชุด เรื่องผีๆ รอบโลก</h3>
+                <h6>ผู้แต่ง : ภาสกร รัตนสุวรรณ</h6>ch
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+            <div class="product-card" data-name="โคนัน ยอดนักสืบประวัติศาสตร์โลก 6: สืบคดีดัง แจ็กเดอะริปเปอร์"
+                data-price="พร้อมให้ยืม" data-img="/static/images/ผี4.png" data-options='[
+        {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/ผี4.png"},
+        {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/ผี4.png"},
+        {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/ผี4.png"}
+    ]'>
+                <img src="/static/images/ผี4.png" alt="ผีอังกฤษ : ชุด เรื่องผีๆ รอบโลก">
+                <h3>โคนัน ยอดนักสืบประวัติศาสตร์โลก 6</h3>
+                <h6>ผู้แต่ง : อาโอยามะ โกโช</h6>
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+            <div class="product-card" data-name="เรื่องวุ่น ๆ ของวัยรุ่นมือใหม่" data-price="พร้อมให้ยืม"
+                data-img="/static/images/วัยรุ่น.png" data-options='[
+        {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/วัยรุ่น.png"},
+        {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/วัยรุ่น.png"},
+        {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/วัยรุ่น.png"}
+    ]'>
+                <img src="/static/images/วัยรุ่น.png" alt="เรื่องวุ่น ๆ ของวัยรุ่นมือใหม่">
+                <h3>เรื่องวุ่น ๆ ของวัยรุ่นมือใหม่</h3>
+                <h6>ผู้แต่ง : Aha Sexuality Education</h6>
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+            <div class="product-card" data-name="เอาชีวิตรอดจากภูมิแพ้ เล่ม 1" data-price="พร้อมให้ยืม"
+                data-img="/static/images/ชีวิตรอด.png" data-options='[
+        {"description": "3 วัน", "price": "฿15.00", "img": "/static/images/ชีวิตรอด.png"},
+        {"description": "5 วัน", "price": "฿25.00", "img": "/static/images/ชีวิตรอด.png"},
+        {"description": "7 วัน", "price": "฿35.00", "img": "/static/images/ชีวิตรอด.png"}
+    ]'>
+                <img src="/static/images/ชีวิตรอด.png" alt="เอาชีวิตรอดจากภูมิแพ้ เล่ม 1">
+                <h3>เอาชีวิตรอดจากภูมิแพ้ เล่ม 1</h3>
+                <h6>ผู้แต่ง : Gomdori co.</h6>
+                <p>เหลือ <span id="stock-โคนัน7"></span> เล่ม</p>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+                    onclick="showProductDetails(this)">ยืมหนังสือ</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="container mt-5  animate__animated animate__zoomIn">
+        <h2>ประวัติการยืมหนังสือ</h2>
+        <ul id="borrowHistoryList" class="list-group">
+            <!-- รายการหนังสือที่ยืมจะแสดงที่นี่ -->
+        </ul>
+    </div>
+    <!-- ปรับแต่งเพิ่มเติมในสไตล์ -->
+    <style>
+        .container mt-5 {
+            padding-top: 30px;
+            /* เพิ่มช่องว่างบน */
+        }
+
+        h2 {
+            margin-top: 20px;
+            /* เพิ่มช่องว่างด้านบนของหัวข้อ */
+        }
+
+        #borrowHistoryList {
+            background-color: transparent;
+            /* ให้พื้นหลังโปร่งใส */
+            margin: 0;
+            padding: 0;
+        }
+
+        #borrowHistoryList li {
+            background-color: #f8f9fa00;
+            /* ใช้สีพื้นหลังเบาๆ ที่ไม่แทรกแซงการแสดงผล */
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        .borrow-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+        }
+    </style>
+
+    <!-- Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Product Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img id="productModalImage" src="" alt="Product Image" class="img-fluid mb-3">
+                        </div>
+                        <div class="col-md-8">
+                            <h6>จำนวนวันที่เลือกยืม</h6>
+                            <div class="product-options"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                    <button type="button" id="checkoutButton" class="btn btn-primary" disabled
+                        onclick="checkout()">ดำเนินการชำระเงิน</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Success -->
+
+    </div>
+    <!-- เรียกใช้ jQuery และ Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        const bookStock = {
+            "โคนัน ยอดนักสืบประวัติศาสตร์โลก 7": 10,
+            "ผีอินโดนีเซีย: ชุด เรื่องผีๆ รอบโลก": 10,
+            "คุกกี้รันผจญภัย เล่ม 43: ผจญภัยในอะแลสกา": 10,
+            "คุกกี้รันเอาชีวิตรอด เล่ม 33: จากงูยักษ์บาซิลิสก์": 10,
+            "ครอบครัวตึ๋งหนืด เล่ม 14 ตอน ไอเดียแก้จนคนตึ๋งหนืด": 10,
+            "ผีอังกฤษ : ชุด เรื่องผีๆ รอบโลก": 10,
+            "โคนัน ยอดนักสืบประวัติศาสตร์โลก 6": 10,
+            "เรื่องวุ่น ๆ ของวัยรุ่นมือใหม่": 10,
+            "เอาชีวิตรอดจากภูมิแพ้ เล่ม 1": 10
+        };
+
+        const borrowHistory = [];
+
+        function checkout() {
+            const bookName = document.getElementById('productModalLabel').textContent;
+
+            if (bookStock[bookName] > 0) {
+                // ลดจำนวนเล่มในสต็อก
+                bookStock[bookName] -= 1;
+
+                // ส่งข้อมูลไปยังหน้าประวัติการยืม แต่ไม่เปลี่ยนหน้า
+                const borrowDays = document.querySelector('.product-options .selected p').textContent;
+                const redirectUrl = `/static/ข้อมูล.html?book=${encodeURIComponent(bookName)}&days=${encodeURIComponent(borrowDays)}`;
+
+                // ส่งข้อมูลผ่าน Ajax แทนที่จะรีเฟรชหน้า
+                $.ajax({
+                    url: redirectUrl,
+                    success: function () {
+                        // แสดง Modal เมื่อการยืมหนังสือสำเร็จ
+                        $('#successModal').modal('show');
+
+                        // ปิด Modal หลังจากการยืมหนังสือสำเร็จ
+                        $('#productModal').modal('hide');
+                    }
+                });
+                $.ajax({
+                    url: redirectUrl,
+                    success: function () {
+                        // แสดง SweetAlert2 เมื่อการยืมหนังสือสำเร็จ
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'ยืมหนังสือสำเร็จ!',
+                            text: 'ขอบคุณที่ใช้บริการ',
+                            confirmButtonText: 'ปิด'
+                        });
+
+                        // ปิด Modal ที่ใช้งานอยู่
+                        $('#productModal').modal('hide');
+                    }
+                });
+
+                // เพิ่มรายการลงในประวัติการยืม
+                borrowHistory.push({ name: bookName, days: borrowDays });
+                updateBorrowHistory();
+
+                // อัปเดตข้อมูลในหน้ารายการหนังสือ
+                updateBookStatus(bookName);
+            } else {
+                // แสดง SweetAlert2 แจ้งว่าไม่มีหนังสือให้ยืม
+                Swal.fire({
+                    icon: 'error',
+                    title: 'หนังสือเล่มนี้ไม่พร้อมให้ยืมแล้ว',
+                    text: 'ขออภัยในความไม่สะดวก',
+                    confirmButtonText: 'ปิด'
+                });
+                $('#productModal').modal('hide');
+
+            }
+        }
+        function updateBorrowHistory() {
+            const historyList = document.getElementById('borrowHistoryList');
+            historyList.innerHTML = '';  // ล้างรายการเก่าออก
+
+            borrowHistory.forEach((book, index) => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('list-group-item');
+                listItem.innerHTML = `
+            <div class="borrow-item">
+                <span>${book.name} (ยืม ${book.days})</span>
+                <button class="btn btn-danger btn-sm" onclick="returnBook(${index})">คืนหนังสือ</button>
+            </div>
+        `;
+                historyList.appendChild(listItem);
+            });
+        }
+        function returnBook(index) {
+            const book = borrowHistory[index];
+            const bookName = book.name;
+
+            // เพิ่มจำนวนสต็อกคืน
+            bookStock[bookName] += 1;
+
+            // ลบหนังสือออกจากประวัติการยืม
+            borrowHistory.splice(index, 1);
+            updateBorrowHistory();
+
+            // อัปเดตสถานะหนังสือในหน้ารายการหนังสือ
+            updateBookStatus(bookName);
+
+            // แสดง SweetAlert2 เมื่อการคืนหนังสือสำเร็จ
+            Swal.fire({
+                icon: 'success',
+                title: 'คืนหนังสือสำเร็จ!',
+                text: `คุณได้คืนหนังสือ "${bookName}" เรียบร้อยแล้ว`,
+                confirmButtonText: 'ปิด'
+            });
+
+            // แสดง Modal เมื่อการคืนหนังสือสำเร็จ
+            $('#successModal').modal('show');
+        }
+
+        function updateBookStatusAll() {
+            const bookCards = document.querySelectorAll('.product-card');
+
+            bookCards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                const stock = bookStock[name];
+                const stockElement = card.querySelector('p span');
+
+                if (stock > 0) {
+                    stockElement.textContent = stock;
+                } else {
+                    card.querySelector('p').textContent = "หมดชั่วคราว";
+                }
+            });
+        }
+
+        function showProductDetails(button) {
+            const card = button.closest('.product-card');
+            const name = card.getAttribute('data-name');
+            const img = card.getAttribute('data-img');
+            const options = JSON.parse(card.getAttribute('data-options'));
+
+            document.getElementById('productModalLabel').textContent = name;
+            document.getElementById('productModalImage').src = img;
+
+            // ล้างตัวเลือกเก่าก่อน
+            const optionsContainer = document.querySelector('.product-options');
+            optionsContainer.innerHTML = '';
+
+            // ปิดปุ่มชำระเงินก่อนที่จะเลือก
+            const checkoutButton = document.getElementById('checkoutButton');
+            checkoutButton.disabled = true;
+
+            // แสดงตัวเลือกใหม่
+            options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.classList.add('option');
+                optionDiv.innerHTML = `
+                    <img src="${option.img}" alt="${option.description}" class="option-img">
+                    <p>${option.description}<br><b>${option.price}</b></p>
+                `;
+
+                // เพิ่ม event listener สำหรับการเลือกตัวเลือก
+                optionDiv.addEventListener('click', function () {
+                    // ลบคลาส selected ออกจากตัวเลือกอื่นๆ
+                    document.querySelectorAll('.product-options .option').forEach(el => el.classList.remove('selected'));
+
+                    // เพิ่มคลาส selected ให้กับตัวเลือกที่ถูกคลิก
+                    optionDiv.classList.add('selected');
+
+                    // เปิดใช้งานปุ่มเมื่อมีการเลือกตัวเลือก
+                    checkoutButton.disabled = false;
+                });
+
+                optionsContainer.appendChild(optionDiv);
+            });
+        }
+
+        function updateBookStatus(bookName) {
+            const bookCards = document.querySelectorAll('.product-card');
+
+            bookCards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                if (name === bookName) {
+                    const stockElement = card.querySelector('p span');
+                    const stock = bookStock[name];
+
+                    if (stock > 0) {
+                        stockElement.textContent = stock;
+                    } else {
+                        card.querySelector('p').textContent = "หมดชั่วคราว";
+                    }
+                }
+            });
+        }
+
+        // เรียก updateBookStatusAll เมื่อโหลดหน้าเว็บ
+        document.addEventListener('DOMContentLoaded', function () {
+            updateBookStatusAll();
+        });
+        Swal.fire({
+            icon: 'success',
+            title: 'คืนหนังสือสำเร็จ!',
+            text: `คุณได้คืนหนังสือ "${bookName}" เรียบร้อยแล้ว`,
+            confirmButtonText: 'ปิด'
+        });
+    </script>
+
+</body>
+
+</html>

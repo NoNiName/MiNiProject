@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ค้นหารายการหนังสือ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" crossorigin href="/static/Project.css">
+</head>
+<style>
+    .container {
+        width: 100%;
+        max-width: 800px;
+        background-color: rgba(0, 0, 0, 0.6);
+        /* สีพื้นหลังที่เปลี่ยนแล้ว */
+        border-radius: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        margin: 20px;
+        max-height: 80vh;
+        /* กำหนดความสูงสูงสุด */
+        overflow-y: auto;
+        border: 2px solid #0000ff;
+        /* ให้เนื้อหาภายในสามารถเลื่อนขึ้น-ลงได้ */
+    }
+
+    h1 {
+        color: #ffffff;
+        /* ตัวหนังสือเป็นสีขาว */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-section {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        /* สีขอบเป็นสีขาวโปร่งแสง */
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 14px;
+        background-color: rgba(0, 0, 0, 0.7);
+        /* พื้นหลังของอินพุตเป็นสีดำโปร่งแสง */
+        color: white;
+        /* ตัวหนังสือในฟอร์มเป็นสีขาว */
+    }
+
+    .btn-primary {
+        background-color: #0000ff;
+        /* สีม่วงเข้ม */
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        color: white;
+        /* ตัวหนังสือปุ่มเป็นสีขาว */
+    }
+
+    .btn-primary:hover {
+        background-color: #0000ff;
+        /* สีม่วงเข้มขึ้นเมื่อ hover */
+    }
+
+    /* กำหนดพื้นฐานปุ่ม .btn-pink */
+    .btn-pink {
+        background-color: rgba(255, 255, 255, 0);
+        /* พื้นหลังโปร่งใสสีม่วงเข้ม */
+        border: 2px solid #0000ff;
+        /* ขอบปุ่มเป็นสีม่วงเข้ม */
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        color: white;
+        /* ตัวหนังสือปุ่มเป็นสีขาว */
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* เอฟเฟกต์ hover */
+    .btn-pink:hover {
+        background-color: #0000ff;
+        /* พื้นหลังโปร่งใสสีม่วงเข้มขึ้นเมื่อ hover */
+        border-color: #0000ff;
+        /* ขอบปุ่มเป็นสีม่วงเข้มขึ้นเมื่อ hover */
+        transform: translateY(-5px);
+        /* เคลื่อนที่ขึ้นเล็กน้อย */
+        box-shadow: 0px 8px 12px rgba(255, 255, 255, 0);
+        /* เพิ่มเงาให้มากขึ้น */
+    }
+
+    /* เอฟเฟกต์เมื่อคลิกปุ่ม */
+    .btn-pink:active {
+        transform: translateY(2px);
+        /* เคลื่อนที่ลงเมื่อคลิก */
+        box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
+        /* ลดเงาเมื่อคลิก */
+    }
+
+    /* เพิ่มเอฟเฟกต์เมื่อได้รับการโฟกัส */
+    .btn-pink:focus {
+        outline: none;
+        /* เอาขอบสีออก */
+        border-color: #0000ff;
+        /* ขอบสีม่วงเข้ม */
+        box-shadow: 0px 0px 8px #0000ff;
+        /* เพิ่มแสงสีม่วงเมื่อปุ่มได้รับการโฟกัส */
+    }
+
+
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .table th {
+        background-color: rgb(0, 0, 0);
+        /* สีม่วงเข้ม */
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        /* ตัวหนังสือในตารางเป็นสีขาว */
+    }
+
+    .table td {
+        background-color: rgba(0, 0, 0, 0.7);
+        /* พื้นหลังเซลล์ตารางเป็นสีดำโปร่งแสง */
+        color: white;
+        /* ตัวหนังสือในเซลล์ตารางเป็นสีขาว */
+    }
+
+    .text-align {
+        color: #eeeeeeaf;
+        /* สีเทาอ่อน */
+    }
+
+    footer {
+        text-align: center;
+        color: #aaa;
+        /* สีเทาอ่อน */
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+    .card {
+        background-color: rgba(0, 0, 0, 0);
+        /* พื้นหลังของการ์ดเป็นสีดำโปร่งแสง */
+        color: white;
+        /* ตัวหนังสือในการ์ดเป็นสีขาว */
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    /* กำหนดพื้นฐานปุ่ม .btn-danger */
+    .btn-danger {
+        background-color: rgba(255, 0, 0, 0.3);
+        /* พื้นหลังโปร่งใสสีแดง */
+        border: 2px solid red;
+        /* ขอบปุ่มเป็นสีแดง */
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        color: white;
+        /* ตัวหนังสือปุ่มเป็นสีขาว */
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* เอฟเฟกต์ hover */
+    .btn-danger:hover {
+        background-color: rgba(255, 0, 0, 0.6);
+        /* พื้นหลังโปร่งใสสีแดงเข้มขึ้นเมื่อ hover */
+        border-color: darkred;
+        /* ขอบปุ่มเป็นสีแดงเข้มขึ้นเมื่อ hover */
+        transform: translateY(-5px);
+        /* เคลื่อนที่ขึ้นเล็กน้อย */
+        box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+        /* เพิ่มเงาให้มากขึ้น */
+    }
+
+    /* เอฟเฟกต์เมื่อคลิกปุ่ม */
+    .btn-danger:active {
+        transform: translateY(2px);
+        /* เคลื่อนที่ลงเมื่อคลิก */
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        /* ลดเงาเมื่อคลิก */
+    }
+
+    /* เพิ่มเอฟเฟกต์เมื่อได้รับการโฟกัส */
+    .btn-danger:focus {
+        outline: none;
+        /* เอาขอบสีออก */
+        border-color: darkred;
+        /* ขอบสีแดงเข้ม */
+        box-shadow: 0px 0px 8px rgba(139, 0, 0, 0.6);
+        /* เพิ่มแสงสีแดงเมื่อปุ่มได้รับการโฟกัส */
+    }
+
+    .form-control {
+        padding: 15px;
+        /* เพิ่ม padding เพื่อให้กรอบใหญ่ขึ้น */
+        font-size: 18px;
+        /* เพิ่มขนาดฟอนต์ */
+        width: 100%;
+        /* ทำให้กรอบเต็มความกว้างของคอลัมน์ */
+        border: 2px solid #0000ff;
+        /* กำหนดขอบเป็นสีม่วง */
+        border-radius: 8px;
+        /* เพิ่มความโค้งมนให้กับขอบ */
+    }
+
+    .form-control:focus {
+        border-color: #0000ff;
+        /* เปลี่ยนสีขอบเมื่อ focus */
+        box-shadow: 0 0 5px #0000ff;
+        /* เพิ่มเงาเมื่อ focus */
+    }
+
+    .animate-float-up {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animate-float-up-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+
+<title>ค้นหารายการหนังสือ</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg animate-float-up">
+        <a class="navbar-brand" href="/static/Zeref.html">Z-BOOK</a>
+        <div class="collapse navbar-collapse">
+           <ul class="navbar-nav ml-auto">
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/หนังสือทั้งหมด.html">หนังสือทั้งหมด</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_book">ค้นหารายการหนังสือ</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_student">ค้นหารายชื่อนักศึกษา</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/เติมเงิน.html">เติมเงิน</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/ออกจากระบบ.html">ออกจากระบบ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container py-5 animate__animated animate__zoomIn">
+        <div class="text-center mb-4">
+            <h1>ค้นหารายการหนังสือ</h1>
+            <p class="text-white">ค้นหาหนังสือโดยใส่คำสำคัญ</p>
+        </div>
+
+        <!-- ฟอร์มเพิ่มหนังสือ -->
+        <div class="card shadow-sm animate__animated animate__bounceIn">
+            <div class="card-body">
+                <form id="addBookForm" action="/add_book" method="POST" class="mb-4">
+                    <div class="row g-2">
+                        <div class="col-md-10">
+                            <input type="text" name="book_name" class="form-control animate__animated animate__bounceIn"
+                                placeholder="กรอกชื่อหนังสือ" required>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-success animate__animated animate__bounceIn"
+                                style="width: 130px;">เพิ่มหนังสือ</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ฟอร์มค้นหาหนังสือ -->
+        <div class="card shadow-sm animate__animated animate__bounceIn mt-4">
+            <div class="card-body">
+                <form action="/search_book" method="GET" class="mb-4">
+                    <div class="row g-2">
+                        <div class="col-md-10">
+                            <input type="text" name="query" class="form-control animate__animated animate__bounceIn"
+                                placeholder="กรอกชื่อหนังสือหรือผู้แต่ง" value="{{ query }}">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit"
+                                class="btn btn-primary w-150 animate__animated animate__bounceIn">ค้นหา</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% if books %}
+        <table class="table table-bordered mt-4 animate-float-up">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>ชื่อหนังสือ</th>
+                    <th>การดำเนินการ</th>
+                    <th>ลบรายการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book[0] }}</td> <!-- book_id -->
+                    <td>{{ book[1] }}</td> <!-- book_name -->
+                    <td>
+                        <a href="/edit_book/{{ book[0] }}" class="btn btn-pink btn-sm">แก้ไข</a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-danger btn-sm delete-book" data-book-id="{{ book[0] }}">ลบ</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-align text-center mt-4">ไม่พบผลลัพธ์สำหรับ "{{ query }}"</p>
+        {% endif %}
+    </div>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const deleteButtons = document.querySelectorAll('.delete-book');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const bookId = this.getAttribute('data-book-id');
+
+                    // ใช้ SweetAlert2 สำหรับการยืนยันการลบ
+                    Swal.fire({
+                        title: 'คุณแน่ใจหรือไม่?',
+                        text: "คุณต้องการลบหนังสือนี้หรือไม่?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'ใช่, ลบเลย!',
+                        cancelButtonText: 'ยกเลิก'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`/delete_book/${bookId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ book_id: bookId })
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        return response.json();
+                                    } else {
+                                        throw new Error('Error deleting book');
+                                    }
+                                })
+                                .then(data => {
+                                    if (data.success) {
+                                        // ใช้ SweetAlert2 สำหรับแจ้งเตือนเมื่อสำเร็จ
+                                        Swal.fire(
+                                            'ลบสำเร็จ!',
+                                            'หนังสือถูกลบเรียบร้อยแล้ว.',
+                                            'success'
+                                        ).then(() => {
+                                            location.reload();
+                                        });
+                                    } else {
+                                        Swal.fire(
+                                            'เกิดข้อผิดพลาด',
+                                            'ไม่สามารถลบหนังสือได้',
+                                            'error'
+                                        );
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    Swal.fire(
+                                        'เกิดข้อผิดพลาด',
+                                        'มีบางอย่างผิดพลาด กรุณาลองใหม่อีกครั้ง',
+                                        'error'
+                                    );
+                                });
+                        }
+                    });
+                });
+            });
+        });
+        document.getElementById('addBookForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // ป้องกันการส่งแบบฟอร์มทันที
+
+            const bookName = document.querySelector('input[name="book_name"]').value;
+
+            // ตรวจสอบว่ากรอกข้อมูลครบหรือไม่
+            if (bookName.trim() === "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'กรุณากรอกชื่อหนังสือ!'
+                });
+            } else {
+                // แสดง SweetAlert2 ยืนยันว่าต้องการเพิ่มหนังสือหรือไม่
+                Swal.fire({
+                    title: 'เพิ่มหนังสือใหม่',
+                    text: `คุณต้องการเพิ่มหนังสือชื่อ "${bookName}" ใช่หรือไม่?`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'ใช่, เพิ่มหนังสือ!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // ส่งแบบฟอร์มหลังจากยืนยัน
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'เพิ่มหนังสือสำเร็จ!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            event.target.submit(); // ส่งแบบฟอร์ม
+                        });
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

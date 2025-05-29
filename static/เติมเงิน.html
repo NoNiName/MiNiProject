@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เติมเงิน</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/static/Project.css">
+    <style>
+        .payment-methods {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 2rem;
+        }
+
+        .payment-method {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 1rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .payment-method img {
+            max-width: 80px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .payment-method p {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        /* เพิ่มการแสดงกรอบเมื่อเลือกช่องทางการเติมเงิน */
+        .payment-method.selected {
+            border: 3px solid #0000ff;
+            /* สีม่วง */
+            box-shadow: 0 0 15px #0000ff;
+            /* เพิ่มเงาสีม่วง */
+            transform: scale(1.05);
+            /* ขยายเล็กน้อยเมื่อเลือก */
+        }
+
+        .payment-details {
+            background-color: #1a1a1a00;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+            color: #fff;
+        }
+
+        .payment-details h2 {
+            margin-bottom: 10px;
+        }
+
+        .payment-details p {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .animate-float-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-float-up-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg animate-float-up">
+        <a class="navbar-brand" href="/static/Zeref.html">Z-BOOK</a>
+        <div class="collapse navbar-collapse">
+           <ul class="navbar-nav ml-auto">
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/หนังสือทั้งหมด.html">หนังสือทั้งหมด</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_book">ค้นหารายการหนังสือ</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_student">ค้นหารายชื่อนักศึกษา</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/เติมเงิน.html">เติมเงิน</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/ออกจากระบบ.html">ออกจากระบบ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content animate__animated animate__zoomIn">
+        <h1>เลือกช่องทางการเติมเงิน</h1>
+        <div class="main-section animate__animated animate__zoomInUp">
+            <!-- Left: Payment Methods -->
+            <div class="payment-methods">
+                <div class="payment-method" id="promptpay" onclick="selectMethod('promptpay')">
+                    <img src="/static/images/promptpay.png" alt="PromptPay">
+                    <p>PromptPay</p>
+                </div>
+                <div class="payment-method" id="truemoney" onclick="selectMethod('truemoney')">
+                    <img src="/static/images/truemoney.png" alt="TrueMoney">
+                    <p>TrueMoney Gift</p>
+                </div>
+                <div class="payment-method" id="redeem" onclick="selectMethod('redeem')">
+                    <img src="/static/images/redeem.png" alt="Redeem Code">
+                    <p>Redeem Code</p>
+                </div>
+            </div>
+
+            <!-- Right: Payment Details -->
+            <div class="payment-details animate-float-up" id="payment-details">
+                <h2>กรุณาเลือกวิธีการเติมเงิน</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h4>Z-BOOK - เติมเงินง่าย ๆ</h4>
+        <p>เลือกช่องทางที่สะดวกแล้วดำเนินการเติมเงินได้เลย!</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function selectMethod(method) {
+            const details = document.getElementById('payment-details');
+            let content = '';
+
+            if (method === 'promptpay') {
+                content = ` 
+                    <h2>PromptPay</h2>
+                    <p>เติมเงินด้วย QRCode</p>
+                    <div class="input-group">
+                        <label for="amount">จำนวนเงินที่ต้องการเติม</label>
+                        <input type="number" id="amount" name="amount" placeholder="กรอกจำนวนเงินที่นี่" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <button type="submit" onclick="confirmPayment()">ยืนยัน</button>
+                `;
+            } else if (method === 'truemoney') {
+                content = `
+                    <h2>TrueMoney Gift</h2>
+                    <p>เติมเงินด้วยบัตร TrueMoney</p>
+                    <div class="input-group">
+                        <label for="truemoney-code">รหัสบัตร TrueMoney</label>
+                        <input type="number" id="truemoney-code" name="truemoney-code" placeholder="กรอกรหัสบัตรที่นี่" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <button type="submit" onclick="confirmPayment()">ยืนยัน</button>
+                `;
+            } else if (method === 'redeem') {
+                content = `
+                    <h2>Redeem Code</h2>
+                    <p>เติมเงินด้วยรหัส Redeem</p>
+                    <div class="input-group">
+                        <label for="redeem-code">รหัส Redeem</label>
+                        <input type="number" id="redeem-code" name="redeem-code" placeholder="กรอกรหัส Redeem ที่นี่" inputmode="numeric" pattern="[0-9]*">
+                    </div>
+                    <button type="submit" onclick="confirmPayment()">ยืนยัน</button>
+                `;
+            }
+
+            details.innerHTML = content;
+        }
+        function confirmPayment() {
+            // ใช้ SweetAlert2 แทน alert() เพื่อให้การแจ้งเตือนดูสวยงาม
+            Swal.fire({
+                icon: 'success',
+                title: 'การเติมเงินเสร็จสมบูรณ์!',
+                text: 'ขอบคุณที่เติมเงินกับเรา',
+                confirmButtonText: 'ปิด'
+            }).then(() => {
+                // หลังจากผู้ใช้กดปุ่มปิด จะทำการเปลี่ยนหน้าไปยังหน้าอื่น
+                window.location.href = "/static/หนังสือทั้งหมด.html";  // ตัวอย่างการเปลี่ยนหน้า
+            });
+        }
+    </script>
+</body>
+
+</html>

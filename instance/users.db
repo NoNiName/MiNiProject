@@ -1,0 +1,7 @@
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), nullable=False, unique=True)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+    password = db.Column(db.String(150), nullable=False)
+    balance = db.Column(db.Float, default=0.0)  # ยอดเงิน
+    profile_picture = db.Column(db.String(150), default='default.jpg')  # ภาพโปรไฟล์

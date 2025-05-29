@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" crossorigin href="/static/Project.css">
+    <title>แก้ไขข้อมูลหนังสือ</title>
+</head>
+<style>
+    .container {
+        width: 100%;
+        max-width: 800px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        margin: 20px;
+        border: 2px solid #0000ff;
+        transition: border-color 0.3s ease;
+        /* เพิ่มการเปลี่ยนสี */
+    }
+
+    h1 {
+        color: #0000ff;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-section {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border: 1px solid #0000ff;
+        /* สีขอบเป็นสีขาวโปร่งแสง */
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 14px;
+        background-color: rgba(0, 0, 0, 0.7);
+        /* พื้นหลังของอินพุตเป็นสีดำโปร่งแสง */
+        color: white;
+        /* ตัวหนังสือในฟอร์มเป็นสีขาว */
+
+    }
+
+    .btn-primary {
+        background-color: #0000ff;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0000ff;
+    }
+
+    .btn-danger {
+        background-color: rgba(255, 0, 0, 0.3);
+        border: 2px solid red;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        color: white;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-danger:hover {
+        background-color: rgba(255, 0, 0, 0.6);
+        border-color: darkred;
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .animate-float-up {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animate-float-up-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg animate-float-up">
+        <a class="navbar-brand" href="/static/Zeref.html">Z-BOOK</a>
+        <div class="collapse navbar-collapse animate-float-up">
+           <ul class="navbar-nav ml-auto">
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/หนังสือทั้งหมด.html">หนังสือทั้งหมด</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_book">ค้นหารายการหนังสือ</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_student">ค้นหารายชื่อนักศึกษา</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/เติมเงิน.html">เติมเงิน</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/ออกจากระบบ.html">ออกจากระบบ</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container py-5 animate__animated animate__zoomIn">
+        <h1 class="mb-4 text-white">แก้ไขข้อมูลหนังสือ</h1>
+        <form id="editBookForm" action="/edit_book/{{ book[0] }}" method="POST">
+            <div class="mb-3">
+                <label for="book_name" class="form-label">ชื่อหนังสือ</label>
+                <input type="text" class="form-control animate__animated animate__bounceIn" id="book_name"
+                    name="book_name" value="{{ book[1] }}" required>
+            </div>
+            <button type="submit"
+                class="btn btn-primary animate__animated animate__bounceIn">บันทึกการเปลี่ยนแปลง</button>
+            <a href="/search_book" class="btn btn-danger animate__animated animate__bounceIn">ยกเลิก</a>
+        </form>
+    </div>
+
+</body>
+
+</html>

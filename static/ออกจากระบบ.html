@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-BOOK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/static/Project.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .login-form,
+        .register-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 2px solid #0000ff;
+        }
+
+        .login-form h2,
+        .register-form h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: #fff;
+        }
+
+        .form-control {
+            background-color: #333;
+            border: none;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #0000ff;
+            border: none;
+        }
+
+        .text-white a {
+            color: #ff0000;
+        }
+
+        .text-white a:hover {
+            color: #ffffff;
+        }
+
+        .login-form p {
+            margin-top: 20px;
+        }
+
+        .login-form,
+        .register-form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 2px solid #0000ff;
+        }
+
+        .login-form h2,
+        .register-form h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #0000ff;
+            border: none;
+        }
+
+        .text-white a {
+            color: #ff0000;
+        }
+
+        .text-white a:hover {
+            color: #ffffff;
+        }
+
+        .login-form p,
+        .register-form footer {
+            margin-top: 20px;
+        }
+
+        .register-form {
+            display: none;
+        }
+
+        .form-control {
+            background-color: #333;
+            /* Dark background for the dropdown */
+            border: none;
+            /* Remove border */
+            color: #fff;
+            /* White text */
+            padding: 10px;
+            /* Padding for a better appearance */
+            border-radius: 5px;
+            /* Rounded corners */
+            font-size: 16px;
+            /* Text size */
+        }
+
+        /* Styling the select dropdown when it's focused (active state) */
+        .form-control:focus {
+            background-color: #444;
+            /* Slightly lighter background when focused */
+            color: #ffffff;
+            /* Yellow text color when focused */
+            outline: none;
+            /* Remove default focus outline */
+        }
+
+        /* Styling the options */
+        .form-control option {
+            background-color: #333;
+            /* Background color for options */
+            color: #fff;
+            /* Text color for options */
+        }
+
+        /* Styling the option when hovered */
+        .form-control option:hover {
+            background-color: #555;
+            /* Slightly lighter background on hover */
+            color: #ffffff;
+            /* Yellow text on hover */
+        }
+
+        /* Styling the option when selected */
+        .form-control option:checked {
+            background-color: #666;
+            /* Even lighter background when selected */
+            color: #ffffff;
+            /* Yellow text for selected option */
+        }
+
+        .text-align {
+            color: #eeeeeeaf;
+            /* สีเทาอ่อน */
+        }
+
+        .animate-float-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-float-up-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg animate-float-up">
+        <a class="navbar-brand" href="/static/Zeref.html">Z-BOOK</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+           <ul class="navbar-nav ml-auto">
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/หนังสือทั้งหมด.html">หนังสือทั้งหมด</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_book">ค้นหารายการหนังสือ</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/search_student">ค้นหารายชื่อนักศึกษา</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/เติมเงิน.html">เติมเงิน</a></li>
+                <li class="nav-item animate__animated animate__zoomIn"><a class="nav-link"
+                        href="/static/ออกจากระบบ.html">ออกจากระบบ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Login Form Section -->
+    <div class="login-form animate__animated animate__zoomIn">
+        <h2 class="text-center">เข้าสู่ระบบ</h2>
+
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="studentID">รหัสนักศึกษา</label>
+                <input type="text" id="studentID" name="studentID" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">รหัสผ่าน</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="form-group text-center">
+                <div id="cloudflare-verification">
+
+                </div>
+            </div>
+            <form action="/signup" method="get">
+                <button type="submit" class="btn btn-primary btn-block animate-float-up">เข้าสู่ระบบ</button>
+            </form>
+        </form>
+        <p class="text-white text-center">ยังไม่มีบัญชีใช่หรือ? <a href="#" id="show-register-form">กดที่นี้เลย!</a></p>
+    </div>
+
+    <!-- Register Form Section -->
+    <div class="register-form container mt-5 animate__animated animate__zoomIn">
+        <h2 class="text-center text-white mb-4">ลงทะเบียนผู้ใช้งาน</h2>
+        <form action="/signup" method="post">
+            <!-- คำนำหน้า และ รหัสนักศึกษา -->
+            <div class="form-group row mb-3">
+                <div class="col">
+                    <label for="prefix" class="text-white">คำนำหน้า:</label>
+                    <select id="prefix" name="prefix" class="form-control" required>
+                        <option hidden>เลือกคำนำหน้า</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นาง">นาง</option>
+                        <option value="นางสาว">นางสาว</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="studentID" class="text-white">รหัสนักศึกษา:</label>
+                    <input type="text" id="studentID" name="studentID" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- ชื่อ และ นามสกุล -->
+            <div class="form-group row mb-3">
+                <div class="col">
+                    <label for="firstName" class="text-white">ชื่อ:</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" required>
+                </div>
+                <div class="col">
+                    <label for="lastName" class="text-white">นามสกุล:</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" required>
+                </div>
+            </div>
+
+            <!-- ชั้นปี และ แผนก -->
+            <div class="form-group row mb-3">
+                <div class="col">
+                    <label for="year" class="text-white">ชั้นปี:</label>
+                    <select id="year" name="year" class="form-control" required>
+                        <option hidden>เลือกชั้นปี</option>
+                        <option value="1">ปวช.1</option>
+                        <option value="2">ปวช.2</option>
+                        <option value="3">ปวช.3</option>
+                        <option value="4">ปวส.1</option>
+                        <option value="5">ปวส.2</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="department" class="text-white">แผนก:</label>
+                    <select id="department" name="department" class="form-control" required>
+                        <option hidden>เลือกแผนก</option>
+                        <option value="แผนกวิชาช่างเทคนิคคอมพิวเตอร์">แผนกวิชาช่างเทคนิคคอมพิวเตอร์</option>
+                        <option value="แผนกวิชาช่างอิเล็กทรอนิกส์">แผนกวิชาช่างอิเล็กทรอนิกส์</option>
+                        <option value="แผนกวิชาช่างไฟฟ้า">แผนกวิชาช่างไฟฟ้า</option>
+                        <option value="แผนกวิชาช่างเชื่อมโลหะ">แผนกวิชาช่างเชื่อมโลหะ</option>
+                    </select>
+                </div>
+            </div>
+            <!-- เลขบัญชี และ อายุ -->
+            <div class="form-group row mb-3">
+                <div class="col">
+                    <label for="accountNumber" class="text-white">เลขบัญชี:</label>
+                    <input type="text" id="accountNumber" name="accountNumber" class="form-control" required>
+                </div>
+                <div class="col">
+                    <label for="age" class="text-white">อายุ:</label>
+                    <input type="number" id="age" name="age" class="form-control" min="1" max="100" required>
+                </div>
+            </div>
+
+            <!-- อีเมล และ เบอร์โทรศัพท์ -->
+            <div class="form-group row mb-3">
+                <div class="col">
+                    <label for="email" class="text-white">อีเมล:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="col">
+                    <label for="phone" class="text-white">เบอร์โทรศัพท์:</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]{10}" required
+                        title="กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (ตัวเลข 10 หลัก)"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <small class="text-align">กรุณากรอกเบอร์โทรศัพท์ 10 หลัก</small>
+                </div>
+            </div>
+
+            <!-- รหัสผ่าน -->
+            <div class="form-group mb-3">
+                <label for="password" class="text-white">รหัสผ่าน:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+
+            <!-- ปุ่มส่งข้อมูล -->
+            <button type="submit" class="btn btn-primary btn-block animate-float-up">ลงชื่อเข้าใช้</button>
+
+            <!-- ลิงก์ไปยังหน้าเข้าสู่ระบบ -->
+            <footer class="text-center mt-3 text-white">
+                มีสมาชิกอยู่แล้วใช่ไหม? <a href="ออกจากระบบ.html" style="color: #ff0000;">กดตรงนี้ได้เลย</a>
+            </footer>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.querySelector('.navbar-toggler').addEventListener('click', function () {
+            const menu = document.querySelector('.navbar-collapse');
+            menu.classList.toggle('show');
+        });
+        document.getElementById('show-register-form').addEventListener('click', function (event) {
+            event.preventDefault();
+            document.querySelector('.login-form').style.display = 'none';
+            document.querySelector('.register-form').style.display = 'block';
+        });
+    </script>
+</body>
+
+</html>
